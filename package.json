@@ -1,0 +1,26 @@
+{
+  "name": "irctc-backend-1",
+  "version": "1.0.0",
+  "description": "This is full irctc backend for backend practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uttammaji/IRCTC-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/uttammaji/IRCTC-Backend/issues"
+  },
+  "homepage": "https://github.com/uttammaji/IRCTC-Backend#readme",
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "mongoose": "^9.11.0"
+  }
+}

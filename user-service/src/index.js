@@ -1,13 +1,12 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const helmet = require('helmet');
-const { config } = require('./config');
-const logger = require('./logger');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
+import { config } from './config/index.js';
+import logger from './config/logger.js';
 
-
-const { corsMiddleware } = require('./middlewares/cors.middleware');
-const errorHandler = require('./middlewares/error.middleware');
-const { reqLogger } = require('./middlewares/req.middleware');
+import { corsMiddleware } from './middlewares/cors.middleware.js';
+import errorHandler from './middlewares/error.middleware.js';
+import reqLogger from './middlewares/req.middleware.js';
 
 const app = express();
 
@@ -16,3 +15,28 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(corsMiddleware);
 app.use(reqLogger);
+
+app.get("/", (req, res) => {
+    res.send("Hello from index.js of user-service");
+});
+
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        message: "ok"
+    });
+});
+
+app.use(errorHandler);
+
+const startServer = async() => {
+    try {
+        const server = app.listen(config.PORT, () => {
+            logger.info(`${config.SERVICE_NAME} is running on http://localhost:${config.PORT}`);
+        });
+    } catch (error) {
+        logger.error("Error occurred while starting the server:", error);
+        process.exit(1);
+    }
+};
+
+startServer();
